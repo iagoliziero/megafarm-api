@@ -6,14 +6,14 @@ public class MedicineTO {
     private Long cod;
     private String name;
     private Double price;
-    private LocalDate dataFactoring;
+    private LocalDate dataManufacturing ;
     private LocalDate dateValidity;
 
-    public MedicineTO(Long cod, String name, Double price, LocalDate dataFactoring, LocalDate dateValidity) {
+    public MedicineTO(Long cod, String name, Double price, LocalDate dataManufacturing, LocalDate dateValidity) {
         this.cod = cod;
         this.name = name;
         this.price = price;
-        this.dataFactoring = dataFactoring;
+        this.dataManufacturing  = dataManufacturing;
         this.dateValidity = dateValidity;
     }
 
@@ -44,12 +44,12 @@ public class MedicineTO {
         this.price = price;
     }
 
-    public LocalDate getDataFactoring() {
-        return dataFactoring;
+    public LocalDate getDataManufacturing() {
+        return dataManufacturing;
     }
 
     public void setDataFactoring(LocalDate dataFactoring) {
-        this.dataFactoring = dataFactoring;
+        this.dataManufacturing = dataFactoring;
     }
 
     public LocalDate getDateValidity() {

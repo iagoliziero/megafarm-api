@@ -2,9 +2,7 @@ package br.com.fiap.resource;
 
 import br.com.fiap.bo.MedicineBO;
 import br.com.fiap.to.MedicineTO;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -27,6 +25,20 @@ public class MedicineResource {
         }
         responseBuilder.entity(result);
         return responseBuilder.build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response save(MedicineTO medicine) {
+        MedicineTO result = MedicineBO.save(medicine);
+        Response.ResponseBuilder response = null;
+        if(result != null) {
+            response = Response.created(null);
+        } else {
+            response = Response.status(400);
+        }
+        response.entity(result);
+        return response.build();
     }
 
 }
