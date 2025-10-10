@@ -16,10 +16,10 @@ import java.util.ArrayList;
             return medicineDAO.findAll();
         }
 
-        public MedicineTO save(MedicineTO medicine) {
+        public static MedicineTO save(MedicineTO medicine) {
             MedicineDAO medicineDAO = new MedicineDAO();
 
-            if(medicine.getDataManufacturing().isBefore(LocalDate.now())) {
+            if(medicine.getDataValidity().isBefore(LocalDate.now())) {
                 return null;
             }
 
