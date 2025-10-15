@@ -12,8 +12,12 @@ import java.util.ArrayList;
 
         public ArrayList<MedicineTO> findAll() {
             medicineDAO = new MedicineDAO();
-
             return medicineDAO.findAll();
+        }
+
+        public MedicineTO findByCode(Long cod) {
+            medicineDAO = new MedicineDAO();
+            return medicineDAO.findByCode(cod);
         }
 
         public static MedicineTO save(MedicineTO medicine) {

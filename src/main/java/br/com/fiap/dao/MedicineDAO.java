@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class MedicineDAO {
 
-        public ArrayList<MedicineTO> findAll() {
+    public ArrayList<MedicineTO> findAll() {
             String sql = "select * from ddd_medicine order by cod";
 
             try(PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
@@ -37,6 +37,30 @@ public class MedicineDAO {
             return null;
         }
 
+    public MedicineTO findByCode(Long cod) {
+        MedicineTO medicine = new MedicineTO();
+        String sql = "select * from ddd_medicine where codigo = ?";
+        try(PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql))
+        {
+            ps.setLong(1, cod);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                medicine.setCod(rs.getLong("cod"));
+                medicine.setName(rs.getString("name"));
+                medicine.setPrice(rs.getDouble("price"));
+                medicine.setDataManufactoring(rs.getDate("data_manufacturing").toLocalDate());
+                medicine.setDataValidity(rs.getDate("data_validity").toLocalDate());
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("Select Error in findbycode: " + e.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection();
+        }
+        return medicine;
+    }
+
         public MedicineTO save(MedicineTO medicine) {
             String sql = "insert into ddd_medicine (name, price, data_manufacturing, data_validity) values(?, ?, ?, ?)";
 
@@ -59,4 +83,6 @@ public class MedicineDAO {
 
             return null;
     }
+
+
 }
